@@ -4,12 +4,12 @@ import { Lists } from "./components/List";
 import { Container } from "semantic-ui-react";
 
 function App() {
-  const [lists, setList] = useState([]);
+  const [listItem, setList] = useState([]);
 
   useEffect(() => {
-    fetch("/api_test").then(response =>
+    fetch("/returnItems").then(response =>
       response.json().then(data => {
-        setList(data.lists);
+        setList(data.listItem);
         console.log(data);
       })
     );
@@ -18,7 +18,9 @@ function App() {
 
   return (
     <Container style={{ marginTop: 40 }}>
-      <Lists lists={lists} />
+      <Lists
+        listTest={listItem}
+        />
     </Container>
   );
 }
