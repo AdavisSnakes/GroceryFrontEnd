@@ -1,31 +1,33 @@
-import React, {useEffect, useState} from 'react';
-import './App.css';
-import { Lists } from "./components/List";
-import { ListItem } from "./components/item";
-import { Container } from "semantic-ui-react";
+import React from "react";
+import { Link } from "react-router-dom";
+import { Nav, Navbar, NavItem } from "react-bootstrap";
+import "./App.css";
+import Routes from "./Routes";
+import { LinkContainer } from "react-router-bootstrap";
 
-function App() {
-  const [listItem, setList] = useState([]);
-
-  useEffect(() => {
-    fetch("/returnItems").then(response =>
-      response.json().then(data => {
-        let jsonobj=JSON.stringify(data.itemlist);
-        setList(jsonobj);
-        console.log(data);
-        console.log(data.itemlist);
-        console.log(listItem);
-        console.log(jsonobj);
-      })
-    );
-  }, []);
-
-//<ListItem itemtest={listItem}/>
-
+function App(props) {
   return (
-    <Container style={{ marginTop: 40 }}>
-      <Lists listTest={listItem}/>
-    </Container>
+    <div className="App container">
+      <Navbar fluid collapseOnSelect>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/">Scratch</Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav pullRight>
+            <LinkContainer to="/signup">
+              <NavItem>Signup</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/login">
+              <NavItem>Login</NavItem>
+            </LinkContainer>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+      <Routes />
+    </div>
   );
 }
 
